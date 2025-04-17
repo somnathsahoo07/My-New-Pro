@@ -3,14 +3,14 @@ import { Typography, List, ListItem, ListItemIcon, ListItemText, IconButton } fr
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const navigate = useNavigate(); 
+  const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
-    setIsCollapsed((prev) => !prev);
+    setIsExpanded((prev) => !prev);
   };
 
   return (
@@ -18,23 +18,23 @@ function Dashboard() {
       
       <div
         className={`bg-gray-800 text-white flex flex-col transition-all duration-300 ${
-          isCollapsed ? 'w-20' : 'w-64'
+          isExpanded ? 'w-64' : 'w-20'
         }`}
         style={{
           height: '100vh',
-          padding: isCollapsed ? '0.5rem' : '1rem',
+          padding: isExpanded ? '1rem' : '0.5rem',
         }}
       >
         <IconButton
           onClick={toggleSidebar}
           className="text-white mb-4"
           style={{
-            alignSelf: isCollapsed ? 'center' : 'flex-end',
+            alignSelf: isExpanded ? 'flex-end' : 'center',
           }}
         >
           <MenuIcon />
         </IconButton>
-        {!isCollapsed && (
+        {isExpanded && (
           <Typography
             variant="h5"
             className="text-center font-bold mb-6"
@@ -52,7 +52,7 @@ function Dashboard() {
             <ListItemIcon>
               <HomeIcon className="text-white" />
             </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Home" />}
+            {isExpanded && <ListItemText primary="Home" />}
           </ListItem>
           <ListItem
             button
@@ -62,7 +62,7 @@ function Dashboard() {
             <ListItemIcon>
               <PersonIcon className="text-white" />
             </ListItemIcon>
-            {!isCollapsed && <ListItemText primary="Profile" />}
+            {isExpanded && <ListItemText primary="Profile" />}
           </ListItem>
         </List>
       </div>
@@ -77,7 +77,6 @@ function Dashboard() {
         <Typography variant="h4" className="font-bold mb-4 text-white text-center">
           Welcome to the Dashboard..!!
         </Typography>
-
       </div>
     </div>
   );
